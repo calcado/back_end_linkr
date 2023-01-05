@@ -2,7 +2,8 @@ import express from "express"
 import cors from "cors"
 import pg from "pg"
 import timeline_post from "./routes/timeline_post.route.js";
-
+import dotenv from "dotenv"
+dotenv.config();
 
 
 

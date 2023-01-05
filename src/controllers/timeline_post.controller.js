@@ -7,7 +7,7 @@ export async function timeline_post(req, res) {
     const {user,url,text} = req.body
 
 try {
-        await connection.query("INSERT INTO posts (userId,url,description,likeCount) VALUES ($1, $2, $3);", [user, url, text,0]);
+        await connection.query("INSERT INTO posts (userid,url,description,likecount) VALUES ($1, $2, $3, $4);", [1, "www.globo.com", "ola mundo",0]);
         res.sendStatus(201);
     } catch (err) {
         res.status(500).send(err.message);
