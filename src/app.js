@@ -8,8 +8,8 @@ import timeline_post from "./routes/timeline_post.route.js";
 
 const { Pool } = pg
 export const connection = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true
+    connectionString: "postgres://sbkpjlpv:v9agjHuEi2t5U4wD_vmowMYe6fS8oEZS@jelani.db.elephantsql.com/sbkpjlpv",
+    ssl: false
 })
 
 const app = express()
