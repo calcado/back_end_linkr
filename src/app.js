@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import pg from "pg"
+import timeline_post from "./routes/timeline_post.route.js";
 
 
 
@@ -12,8 +13,10 @@ export const connection = new Pool({
 })
 
 const app = express()
+
 app.use(express.json())
 app.use(cors())
 
+app.use(timeline_post);
 
 app.listen(5000)
