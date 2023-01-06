@@ -32,7 +32,7 @@ export async function signUpValidation (req, res, next) {
      
 }
 
-export async function signInValidation () {
+export async function signInValidation (req, res, next) {
 
     const user = req.body
 

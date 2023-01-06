@@ -6,6 +6,6 @@ import { signInValidation } from "../middlewares/authMiddleware.js";
 const trendingRoute = Router()
 
 
-trendingRoute.get("/signup", signInValidation, trending)
+trendingRoute.get("/trending", signInValidation, trending)
 
 export default trendingRoute

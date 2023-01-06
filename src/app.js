@@ -3,8 +3,8 @@ import cors from "cors"
 import pg from "pg"
 import timeline_post from "./routes/timeline_post.route.js";
 import dotenv from "dotenv"
+import trendingRouter from "./routes/trendingRoutes.js"
 dotenv.config();
-
 
 
 const { Pool } = pg
@@ -19,5 +19,6 @@ app.use(express.json())
 app.use(cors())
 
 app.use(timeline_post);
+app.use(trendingRouter);
 
 app.listen(5000)
