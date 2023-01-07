@@ -33,12 +33,21 @@ async function getUser (token) {
 
 }
 
+async function getUserById (userId) {
+
+    return (await connection.query(`SELECT users.name AS "userName", users."urlpicture" AS "urlPicture",
+        (SELECT json_agg (post) FROM (SELECT posts.url AS url, posts.description AS description, posts."likecount" AS "likeCount"
+        FROM posts WHERE "userid" = $1 ) post) AS "posts"
+        FROM users WHERE id = $1`, [userId])).rows
+}
+
 const userRepository = {
     checkEmail, 
     registerUser,
     createSession,
     deleteSession,
-    getUser
+    getUser,
+    getUserById
 }
 
 export default userRepository
