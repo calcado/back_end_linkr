@@ -1,7 +1,7 @@
 import { connection } from "../app.js";
 import { timeline_post_schema } from "../schemas/timeline_post.schema.js";
 import urlMetadata from "url-metadata";
-import { postHashtag } from "../repositories/trendingRepository.js";
+import trendingRepository  from "../repositories/trendingRepository.js";
 
 export async function timeline_post(req, res) {
     let dados;
@@ -33,7 +33,7 @@ export async function timeline_post(req, res) {
     );
 
     try {
-        postHashtag(description);
+        trendingRepository.postHashtag(description);
 
         await connection.query(
             "INSERT INTO posts (userid,url,description,likecount,descricao,titulo,imgurl) VALUES ($1, $2, $3, $4,$5,$6,$7);",

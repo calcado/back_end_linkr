@@ -1,13 +1,17 @@
 import { Router } from "express";
-import { trending } from "../controllers/trendingController.js";
-import { signInValidation } from "../middlewares/authMiddleware.js";
-import { trendingValidation } from "../middlewares/trendingMiddleware.js";
+import { connection } from "../app.js";
+import { trending, trendingPosts } from "../controllers/trendingController.js";
 
 
 const trendingRoute = Router()
 
 
-trendingRoute.get("/trending", signInValidation, trending)
-trendingRoute.get("/trending", signInValidation, trendingValidation, trending)
+trendingRoute.get("/trending", trending)
+trendingRoute.get("/hashtag/:hashtag", trendingPosts)
+//TESTE PARA PEGAR AS HASHTAGS
+trendingRoute.get("/hashtags", async (req,res) => {
+     const hashtags = await connection.query("SELECT * FROM trending;")
+     res.status(200).send(hashtags.rows)
+})
 
-export default trendingRoute
+export default trendingRoute;
