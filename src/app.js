@@ -11,7 +11,7 @@ dotenv.config();
 
 const { Pool } = pg
 export const connection = new Pool({
-    connectionString: "postgres://postgres:root@localhost:5432/linkr",
+    connectionString: "postgres://sbkpjlpv:v9agjHuEi2t5U4wD_vmowMYe6fS8oEZS@jelani.db.elephantsql.com/sbkpjlpv",
     ssl: false
 })
 
