@@ -9,8 +9,12 @@ export async function trending(req, res) {
         res.status(200).send(trendingList.rows);
 
     } catch (err) {
-        
+
         console.log(err);
         res.status(500).send(err);
     }
+}
+
+export async function addTrending(req, res) {
+    const trending = req.trending;
 }

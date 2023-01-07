@@ -5,7 +5,7 @@ import {v4 as uuid} from "uuid"
 
 
 
-export async function signUp () {
+export async function signUp (req, res) {
 
     const user = req.user
     user.password = bcrypt.hashSync(user.password, 10)
@@ -13,7 +13,7 @@ export async function signUp () {
     try {
 
         await userRepository.registerUser(user)
-        res.status(201).send("Usuário cadastrados!")
+        res.status(201).send("Usuário cadastrado!")
 
     } catch (err) {
         res.status(500).send(err)
@@ -21,19 +21,33 @@ export async function signUp () {
     }
 }
 
-export async function signIn () {
+export async function signIn (req, res) {
 
     const {email} = req.user
-    const token = uuid()
+    const token = uuid().replaceAll("-",'')
 
     try {
 
         await userRepository.createSession(email, token)
+        const {id, name, urlPicture} = await userRepository.checkEmail(email)
 
-        res.status(201).send(token)
+        res.status(201).send({userId: id, email:email, userName:name, urlPicture:urlPicture, token:token})
         
     } catch (err) {
         console.log(err)
         res.status(500).send(err)
     }
+}
+
+export async function logout (req, res) {
+
+    const {token} = req.params
+    try{
+       await userRepository.deleteSession(token) 
+       res.sendStatus(200)
+    } catch (err) {
+        console.log(err)
+        res.status(500).send(err)
+    }
+    
 }
