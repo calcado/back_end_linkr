@@ -3,6 +3,7 @@ import cors from "cors"
 import pg from "pg"
 import authRoute from "./routes/authRoutes.js"
 import timeline_post from "./routes/timeline_post.route.js";
+import timeline_get from "./routes/timeline_get.route.js";
 import dotenv from "dotenv"
 dotenv.config();
 
@@ -21,5 +22,6 @@ app.use(cors())
 app.use(authRoute)
 
 app.use(timeline_post);
+app.use(timeline_get);
 
 app.listen(5000)
