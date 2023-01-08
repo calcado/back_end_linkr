@@ -1,9 +1,9 @@
 import { connection } from "../app.js";
 
-export async function userLike(req,res)
+export async function userLike(req,res){
 const postId = req.params
 const userId = res.locals.userId
-{
+
  try{
  await connection.query(`INSERT INTO likes ('userId', 'postId') VALUES ($1,$2);`,[userId,postId])
  res.sendStatus(201)
