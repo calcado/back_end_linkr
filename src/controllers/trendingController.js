@@ -20,11 +20,11 @@ export async function trending(req, res) {
 export async function trendingPosts(req, res) {
     const { hashtag } = req.params
     try {
-        const { id } = await connection.query("SELECT * FROM trending WHERE name = $1", [hashtag])
+        const { id } = await connection.query("SELECT * FROM trending WHERE name = $1;", [hashtag])
 
-        const {rows} = trendRepository.findPostsWithHashtag(id); 
+        const posts = trendRepository.findPostsWithHashtag(id); 
 
-        res.status(200).send(rows)
+        res.status(200).send(posts)
 
     } catch (err) {
 

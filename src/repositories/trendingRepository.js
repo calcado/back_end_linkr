@@ -3,6 +3,7 @@ import findHashtags from "find-hashtags";
 
 async function postHashtag(description) {
     const hashtags = findHashtags(description);
+    console.log(hashtags)
 
     try {
         hashtags?.map(async (hashtag) => {
@@ -32,8 +33,8 @@ async function findPostsWithHashtag(hashtagId) {
             JOIN "postTrending" 
                 ON posts.id="postTrending"."postId"
             JOIN trending 
-                ON trending.id="postTrending"."trendingId";
-            WHERE trending.id = $1`, [hashtagId],
+                ON trending.id="postTrending"."trendingId"
+            WHERE trending.id = $1;`, [hashtagId],
         );
         return rows;
 
