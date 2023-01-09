@@ -3,10 +3,15 @@ import cors from "cors"
 import pg from "pg"
 import dotenv from "dotenv"
 
+import userRoute from "./routes/usersRoutes.js";
+
+
+
 import trendingRoute from "./routes/trendingRoutes.js";
 import timelineRoute from "./routes/timelineRoutes.js";
 import authRoute from "./routes/authRoutes.js"
 import likeRoute from "./routes/likeRoutes.js"
+
 
 dotenv.config();
 
@@ -26,7 +31,9 @@ app.use(express.json())
 app.use(cors())
 app.use(authRoute)
 app.use(userRoute)
+
 app.use(trendingRoute);
+
 app.use(likeRoute)
 app.use(timelineRoute);
 
