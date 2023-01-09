@@ -11,11 +11,6 @@ dotenv.config();
 
 const { Pool } = pg
 export const connection = new Pool({
-    /* user: "postgres",
-    host: "localhost",
-    port: 5432,
-    database: "exercicio_mystoreultrasystem_3a28727e",
-    password: "root", */
     connectionString: process.env.DATABASE_URL,
     ssl: true
 })
