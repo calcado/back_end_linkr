@@ -19,3 +19,11 @@ await connection.query(`DELETE from likes WHERE 'userId'=$1 AND 'postId'=$2;`,[u
 res.sendStatus(204)
 }catch(err){console.log(err)}
 }
+
+export async function getLikes(req,res){
+    const postId = req.params
+    try{
+    const numberLikes =  await connection.query(`SELECT COUNT('postId') FROM likes WHERE "postId"=$1;`,[postId])  
+    res.send(numberLikes).status(201);
+}catch(err){console.log(err)}
+}
