@@ -24,7 +24,7 @@ export async function signUp (req, res) {
 export async function signIn (req, res) {
 
     const {email} = req.user
-    const token = uuid().replaceAll("-",'')
+    const token = uuid()
 
     try {
 
