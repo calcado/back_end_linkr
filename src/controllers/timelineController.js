@@ -55,4 +55,36 @@ export async function timeline_post(req, res) {
     } catch (err) {
         res.status(500).send(err.message);
     }
+    
+}
+
+export async function timeline_get(req, res) {
+   
+    try {
+        const { rows } = await connection.query("SELECT * FROM posts ORDER BY id desc LIMIT 20 ")
+        res.send(rows);
+    } catch (err) {
+        res.status(500).send(err.messsage);
+    }
+         
+   
+}
+
+export async function updatePost(req,res){
+const postId = req.params
+const body = req.body
+
+try{
+await connection.query(`UPDATE posts SET description = $1 WHERE postId = $2;`,[body,postId])
+
+}catch(err){
+    console.log(err)}    
+}
+
+export async function deletePost(req,res){
+const postId = req.params
+try{
+await connection.query(`DELETE posts WHERE id= $1`,[postId])
+}catch(err){console.log(err)}
+
 }
