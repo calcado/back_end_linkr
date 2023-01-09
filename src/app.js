@@ -13,8 +13,10 @@ dotenv.config();
 
 const { Pool } = pg
 export const connection = new Pool({
+
     connectionString: "postgres://sbkpjlpv:v9agjHuEi2t5U4wD_vmowMYe6fS8oEZS@jelani.db.elephantsql.com/sbkpjlpv",
     ssl: false
+
 })
 
 
@@ -23,11 +25,9 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 app.use(authRoute)
-
+app.use(userRoute)
 app.use(trendingRoute);
 app.use(likeRoute)
 app.use(timelineRoute);
-
-
 
 app.listen(5000)
