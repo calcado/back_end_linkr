@@ -6,7 +6,7 @@ const timelineRoute = Router();
 
   timelineRoute.get("/timeline",tokenValidation, timeline_get);
   timelineRoute.post("/timeline", tokenValidation, timeline_post);
-  timelineRoute.update("/timeline/posts/:id", tokenValidation, updatePost);
+  timelineRoute.put("/timeline/posts/:id", tokenValidation, updatePost);
   timelineRoute.delete("/timeline/posts/:id", tokenValidation, deletePost);
   
 export default timelineRoute;

@@ -72,7 +72,7 @@ export async function signInValidation(req, res, next) {
 export async function tokenValidation (req, res, next) {
 
     const { authorization } = req.headers
-    const token = authorization.replace("Bearer ", "")
+    const token = authorization?.replace("Bearer ", "")
 
     try {
         if (!token) {

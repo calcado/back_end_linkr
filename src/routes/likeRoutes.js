@@ -1,10 +1,10 @@
 import {Router} from "express";
-import { userLike,userUnlike } from "../controllers/likeController.js";
+import { getLikes, userLike,userUnlike } from "../controllers/likeController.js";
 import { tokenValidation } from "../middlewares/authMiddleware.js";
 
 const likeRoute = Router();
 
-likeRoute.post("/timeline/postId", tokenValidation,userLike);
-likeRoute.delete("/timeline/postId", tokenValidation, userUnlike);
-
+likeRoute.post("/timeline/likes", tokenValidation, userLike);
+likeRoute.delete("/timeline/likes/:id", tokenValidation, userUnlike);
+likeRoute.get("/timeline/likes/:id", tokenValidation, getLikes );
 export default likeRoute
