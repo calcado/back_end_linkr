@@ -25,7 +25,7 @@ export async function signIn (req, res) {
 
     const {email} = req.user
     const token = uuid().replaceAll("-",'')
-
+    
     try {
 
         await userRepository.createSession(email, token)
