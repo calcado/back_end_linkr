@@ -4,7 +4,8 @@ import pg from "pg"
 import dotenv from "dotenv"
 
 import trendingRoute from "./routes/trendingRoutes.js";
-import timelineRoute from "./routes/timelineRoutes";import authRoute from "./routes/authRoutes.js"
+import timelineRoute from "./routes/timelineRoutes.js";
+import authRoute from "./routes/authRoutes.js"
 import likeRoute from "./routes/likeRoutes.js"
 
 dotenv.config();
