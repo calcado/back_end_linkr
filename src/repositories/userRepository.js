@@ -36,9 +36,15 @@ async function getUser (token) {
 async function getUserById (userId) {
 
     return (await connection.query(`SELECT users.name AS "userName", users."urlpicture" AS "urlPicture",
-        (SELECT json_agg (post) FROM (SELECT posts.url AS url, posts.description AS description, posts."likecount" AS "likeCount"
+        (SELECT json_agg (post) FROM (SELECT posts.url AS url, posts.description AS description, posts."likecount" AS "likeCount",
+        posts.descricao, posts.titulo, posts.imgurl
         FROM posts WHERE "userid" = $1 ) post) AS "posts"
-        FROM users WHERE id = $1`, [userId])).rows
+        FROM users WHERE id = $1`, [userId])).rows[0]
+}
+
+async function getUserByName (userName) {
+
+    return (await connection.query(`SELECT users.id, users.name, users.urlpicture FROM users WHERE name ILIKE $1`, [(`%${userName}%`)])).rows
 }
 
 const userRepository = {
@@ -47,7 +53,8 @@ const userRepository = {
     createSession,
     deleteSession,
     getUser,
-    getUserById
+    getUserById,
+    getUserByName
 }
 
 export default userRepository
