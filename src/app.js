@@ -6,6 +6,7 @@ import timeline_post from "./routes/timeline_post.route.js";
 import timeline_get from "./routes/timeline_get.route.js";
 import dotenv from "dotenv"
 import userRoute from "./routes/usersRoutes.js";
+import trendingRoute from "./routes/trendingRoutes.js";
 dotenv.config();
 
 
@@ -16,7 +17,7 @@ export const connection = new Pool({
     port: 5432,
     database: "exercicio_mystoreultrasystem_3a28727e",
     password: "root", */
-    connectionString: "postgres://sbkpjlpv:v9agjHuEi2t5U4wD_vmowMYe6fS8oEZS@jelani.db.elephantsql.com/sbkpjlpv",
+    connectionString: "postgres://postgres:root@localhost:5432/linkr",
     ssl: false
 })
 
@@ -29,7 +30,7 @@ app.use(authRoute)
 app.use(userRoute)
 
 app.use(timeline_post);
-app.use(trendingRouter);
+app.use(trendingRoute);
 app.use(timeline_get);
 
 app.listen(5000)

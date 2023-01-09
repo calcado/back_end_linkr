@@ -18,11 +18,18 @@ export async function trending(req, res) {
 }
 
 export async function trendingPosts(req, res) {
-    const { hashtag } = req.params
+    const { hashtag } = req.params;
+    
     try {
-        const { id } = await connection.query("SELECT * FROM trending WHERE name = $1;", [hashtag])
+        const { id } = await trendRepository.findHashtag(hashtag)
+        
+        if (!id) {
+            return res.status(404).send({message: "Hashtag não encontrada!"});
+        }
 
-        const posts = trendRepository.findPostsWithHashtag(id); 
+        const posts = await trendRepository.findPostsWithHashtag(id); 
+        
+        trendRepository.incrementView(id)
 
         res.status(200).send(posts)
 

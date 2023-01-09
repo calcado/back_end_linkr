@@ -33,12 +33,12 @@ export async function timeline_post(req, res) {
     );
 
     try {
-        trendingRepository.postHashtag(description);
+        const hashtagsId = await trendingRepository.postHashtag(description);
 
-        await connection.query(
-            "INSERT INTO posts (userid,url,description,likecount,descricao,titulo,imgurl) VALUES ($1, $2, $3, $4,$5,$6,$7);",
+        const {rows} = await connection.query(
+            "INSERT INTO posts (userid,url,description,likecount,descricao,titulo,imgurl) VALUES ($1, $2, $3, $4,$5,$6,$7) RETURNING id;",
             [
-                1,
+                3,
                 dados.url,
                 description,
                 0,
@@ -47,6 +47,10 @@ export async function timeline_post(req, res) {
                 dados.image,
             ]
         );
+        const postId = rows[0].id;
+
+        trendingRepository.postTrending(postId, hashtagsId);
+
         res.sendStatus(201);
     } catch (err) {
         res.status(500).send(err.message);
