@@ -2,24 +2,18 @@ import express from "express"
 import cors from "cors"
 import pg from "pg"
 import dotenv from "dotenv"
-
 import userRoute from "./routes/usersRoutes.js";
-
-
-
 import trendingRoute from "./routes/trendingRoutes.js";
 import timelineRoute from "./routes/timelineRoutes.js";
 import authRoute from "./routes/authRoutes.js"
 import likeRoute from "./routes/likeRoutes.js"
-
-
 dotenv.config();
 
 
 const { Pool } = pg
 export const connection = new Pool({
 
-    connectionString: "postgres://sbkpjlpv:v9agjHuEi2t5U4wD_vmowMYe6fS8oEZS@jelani.db.elephantsql.com/sbkpjlpv",
+    connectionString: 'postgres://sbkpjlpv:v9agjHuEi2t5U4wD_vmowMYe6fS8oEZS@jelani.db.elephantsql.com/sbkpjlpv',
     ssl: false
 
 })
