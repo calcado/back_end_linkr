@@ -1,5 +1,5 @@
 import { connection } from "../app.js";
-import findHashtags from "find-hashtags";
+import findHashtags from "find-hashtags"
 
 async function postHashtag(description) {
     const hashtags = findHashtags(description);

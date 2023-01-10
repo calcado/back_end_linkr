@@ -2,6 +2,7 @@ import { connection } from "../app.js";
 import { timeline_post_schema } from "../schemas/timeline_post.schema.js";
 import urlMetadata from "url-metadata";
 import trendingRepository  from "../repositories/trendingRepository.js";
+import trendRepository from "../repositories/trendingRepository.js";
 
 export async function timeline_post(req, res) {
     let dados;
@@ -53,6 +54,7 @@ export async function timeline_post(req, res) {
 
         res.sendStatus(201);
     } catch (err) {
+        console.log(err)
         res.status(500).send(err.message);
     }
     
