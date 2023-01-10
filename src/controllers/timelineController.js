@@ -5,6 +5,11 @@ import trendingRepository  from "../repositories/trendingRepository.js";
 import trendRepository from "../repositories/trendingRepository.js";
 
 export async function timeline_post(req, res) {
+    console.log()
+    const push = await connection.query("SELECT * FROM users WHERE id=$1;",[req.userId])
+    
+    const  user = push.rows[0]
+    console.log(user)
     let dados;
     const validation = timeline_post_schema.validate(req.body, {
         abortEarly: false,
@@ -39,7 +44,7 @@ export async function timeline_post(req, res) {
         const {rows} = await connection.query(
             "INSERT INTO posts (userid,url,description,likecount,descricao,titulo,imgurl) VALUES ($1, $2, $3, $4,$5,$6,$7) RETURNING id;",
             [
-                3,
+                req.userId,
                 dados.url,
                 description,
                 0,
@@ -61,9 +66,11 @@ export async function timeline_post(req, res) {
 }
 
 export async function timeline_get(req, res) {
+
    
     try {
-        const { rows } = await connection.query("SELECT * FROM posts ORDER BY id desc LIMIT 20 ")
+        const { rows } = await connection.query("SELECT * FROM posts JOIN users ON posts.userid = users.id  ORDER BY users.id desc LIMIT 20 ")
+       
         res.send(rows);
     } catch (err) {
         res.status(500).send(err.messsage);
