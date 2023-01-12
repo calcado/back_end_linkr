@@ -69,7 +69,7 @@ export async function timeline_get(req, res) {
 
    
     try {
-        const { rows } = await connection.query("SELECT * FROM posts JOIN users ON posts.userid = users.id  ORDER BY users.id desc LIMIT 20 ")
+        const { rows } = await connection.query("SELECT posts.id,posts.userid,posts.description,posts.likecount,posts.imgurl,posts.titulo,posts.descricao FROM posts JOIN users ON posts.userid = users.id  ORDER BY users.id desc LIMIT 20 ")
        
         res.send(rows);
     } catch (err) {
