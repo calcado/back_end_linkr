@@ -8,6 +8,7 @@ import timelineRoute from "./routes/timelineRoutes.js";
 import authRoute from "./routes/authRoutes.js"
 import likeRoute from "./routes/likeRoutes.js"
 import deletepost from "./routes/deletepost.js"
+import commentRoute from "./routes/commentsRoutes.js";
 dotenv.config();
 
 
@@ -22,15 +23,14 @@ export const connection = new Pool({
 
 const app = express()
 
-app.use(express.json())
-app.use(cors())
-app.use(authRoute)
-app.use(userRoute)
-
+app.use(express.json());
+app.use(cors());
+app.use(authRoute);
+app.use(userRoute);
 app.use(trendingRoute);
-
-app.use(likeRoute)
+app.use(likeRoute);
 app.use(timelineRoute);
-app.use(deletepost)
+app.use(deletepost);
+app.use(commentRoute);
 
-app.listen(5000)
+app.listen(5000);
