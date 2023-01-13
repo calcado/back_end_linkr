@@ -8,6 +8,7 @@ import timelineRoute from "./routes/timelineRoutes.js";
 import authRoute from "./routes/authRoutes.js"
 import likeRoute from "./routes/likeRoutes.js"
 import deletepost from "./routes/deletepost.js"
+import editpost from "./routes/editpost.js"
 dotenv.config();
 
 
@@ -32,5 +33,6 @@ app.use(trendingRoute);
 app.use(likeRoute)
 app.use(timelineRoute);
 app.use(deletepost)
+app.use(editpost)
 
 app.listen(5000)
