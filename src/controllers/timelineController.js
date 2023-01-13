@@ -91,9 +91,12 @@ await connection.query(`UPDATE posts SET description = $1 WHERE postId = $2;`,[b
 }
 
 export async function deletePost(req,res){
-const postId = req.params
+const {id} = req.headers
 try{
-await connection.query(`DELETE posts WHERE id= $1`,[postId])
-}catch(err){console.log(err)}
+await connection.query(`DELETE posts WHERE id= $1`,[id])
+res.sendStatus(200)
+}catch(err){console.log(err)
+    res.sendStatus(500)
+}
 
 }
