@@ -18,18 +18,12 @@ export async function trending(req, res) {
 }
 
 export async function trendingPosts(req, res) {
-    const { hashtag } = req.params;
+    const hashtagId = req.hashtagId;
     
     try {
-        const { id } = await trendRepository.findHashtag(hashtag)
+        const posts = await trendRepository.findPostsWithHashtag(hashtagId); 
         
-        if (!id) {
-            return res.status(404).send({message: "Hashtag não encontrada!"});
-        }
-
-        const posts = await trendRepository.findPostsWithHashtag(id); 
-        
-        trendRepository.incrementView(id)
+        trendRepository.incrementView(hashtagId)
 
         res.status(200).send(posts)
 

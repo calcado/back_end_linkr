@@ -36,10 +36,10 @@ async function findPostsWithHashtag(hashtagId) {
         const { rows } = await connection.query(
             `SELECT posts.* 
             FROM posts
-            JOIN "postTrending" 
-                ON posts.id="postTrending"."postId"
+            JOIN posttrending 
+                ON posts.id=posttrending.postid
             JOIN trending 
-                ON trending.id="postTrending"."trendingId"
+                ON trending.id=posttrending.trendingid
             WHERE trending.id = $1;`, [hashtagId],
         );
         return rows;
@@ -53,7 +53,7 @@ async function postTrending(postId, hashtagsId) {
     
     try {
         hashtagsId.map(async hashtagId => {
-            await connection.query(`INSERT INTO "postTrending" ("postId", "trendingId") VALUES ($1, $2);`, [postId, hashtagId])
+            await connection.query(`INSERT INTO posttrending (postid, trendingid) VALUES ($1, $2);`, [postId, hashtagId])
         })
 
     } catch (err) {
